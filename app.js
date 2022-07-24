@@ -9,15 +9,19 @@ console.log("Let's get this party started!");
 
 const gif = document.querySelector("#gif-area");
 const input = document.querySelector("#search");
+const img = document.querySelector("#image");
 
 async function getGif(gif) { 
 try {
+    // const img = document.createElement('img');
     const url = `http://api.giphy.com/v1/gifs/search?q=${gif}&api_key=MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym`
     const res = await axios.get(url);
-    console.log(res.data);
-    gif.src = res.data.images;
+    console.log(res.data.data[Math.floor(Math.random() * res.data.data.length)].images.original.url);
+    img.src = res.data.data[Math.floor(Math.random() * res.data.data.length)].images.original.url
+    // gif.appendChild(img);
+    
 } catch (e) {
-    alert('GIF not found')
+    alert('GIF not found');
 }
 }
 
@@ -29,3 +33,7 @@ form.addEventListener("submit", function(e){
 getGif(input.value);
 input.value = '';
 })
+
+// const empty = form.addEventListener('click', function() {
+   
+// })
